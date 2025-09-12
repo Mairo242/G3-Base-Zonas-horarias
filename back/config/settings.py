@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,13 +20,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6@da@f^)a2uv$@ydyy=#0snmkqj4wuly@w6u0(n!1sgbby&2qr'
+# 🔑 Variables de entorno
+SECRET_KEY = config("DJANGO_SECRET_KEY", default="insecure-key")
+DEBUG = config("DEBUG", default=True, cast=bool)
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="").split(",")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+# API de GHL
+GHL_PRIVATE_TOKEN = config("GHL_PRIVATE_TOKEN", default=None)
+
+GHL_API_BASE = config("GHL_API_BASE", default="https://services.leadconnectorhq.com")
+
+GHL_API_KEY = config("GHL_API_KEY", default=None)
+
+SIMULATE_GHL = config("SIMULATE_GHL", default=True, cast=bool)
+
+GHL_LOCATION_ID = config("GHL_LOCATION_ID", default=None)
 
 
 # Application definition
@@ -37,10 +47,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders', # CORS
+    'app',         # APP
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    'django.middleware.security.SecurityMiddleware',           # 👈 debe ir primero
+    'corsheaders.middleware.CorsMiddleware',                   # 👈 va después
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -120,3 +134,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Origenes permitidos
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Cambia según donde esté tu frontend
+    "http://127.0.0.1:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True  # Si usas autenticación basada en cookies
+
+# -----------------------------
+# Simulación activada (desactiva al poner en producción 'False') 
+SIMULATE_GHL = True
