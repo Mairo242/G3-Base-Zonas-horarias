@@ -1,0 +1,105 @@
+/* Contenedor principal */
+.card {
+  padding: 2rem;
+  background-color: #f9f9ff;
+  border-radius: 12px;
+  box-shadow: 0 0 1rem #ccc;
+  margin: 2rem auto;
+  max-width: 900px;
+  text-align: center;
+}
+
+/* Tabla dentro de card */
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.card table th,
+.card table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.card table th {
+  background-color: #646cff;
+  color: white;
+}
+
+.card table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.card table tr:hover {
+  background-color: #e0e0ff;
+}
+
+/* Botones */
+form button[type="submit"] {
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+form button[type="submit"]:hover {
+  background-color: #5355d4;
+  transform: translateY(-2px);
+}
+
+
+/* Logo (de tu CSS original) */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cff);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Animación */
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Enlaces pequeños */
+.read-the-docs {
+  color: #888;
+  display: block;
+  margin-top: 1rem;
+}
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  background-color: #646cff; /* color de fondo del header */
+  padding: 1rem 0;
+  border-radius: 8px; /* opcional, para bordes redondeados */
+}
+
+.app-title {
+  color: white; /* color del texto */
+  font-size: 2rem;
+  margin: 0;
+}
