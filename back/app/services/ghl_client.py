@@ -3,10 +3,10 @@ from django.conf import settings
 
 class GHLClient:
     def __init__(self):
-        # BASE URL para GET (sin /v1)
+        # BASE URL para GET 
         self.base_url_get = settings.GHL_API_BASE.rstrip("/")
 
-        # BASE URL para POST (con /v1)
+        # BASE URL para POST 
         self.base_url_post = self.base_url_get
         if not self.base_url_post.endswith("/v1"):
             self.base_url_post += "/v1"

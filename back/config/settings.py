@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from decouple import config, Csv
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -136,13 +137,16 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Origenes permitidos
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Cambia según donde esté tu frontend
-    "http://127.0.0.1:3000",
+    "http://localhost:5501",  # Cambia según donde esté tu frontend
+    "http://127.0.0.1:5501",
+    "http://localhost:5173",
 ]
 
 CORS_ALLOW_CREDENTIALS = True  # Si usas autenticación basada en cookies
 
 # -----------------------------
 # Simulación activada (desactiva al poner en producción 'False') 
-SIMULATE_GHL = True
+SIMULATE_GHL = config("SIMULATE_GHL", default="True").strip().lower() in ("true", "1", "yes")
+
